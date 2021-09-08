@@ -1,11 +1,25 @@
 <script>
     import { invoke } from '@tauri-apps/api/tauri'
-    import { createDir, writeFile, readDir } from '@tauri-apps/api/fs'
+    import { createDir, writeFile, readDir, FsTextFileOption } from '@tauri-apps/api/fs'
     var demo = {
         "name": "",
     }
+
     function initDemo() {
+        let name = demo.name;
+        let dir = "C:\\Users\\User\\Demos\\" + demo.name + "\\";
+        let path = dir + name + ".yaml";
+        createDir(dir);
+        writeFile({
+            path: path,
+            contents: ""
+        });
         invoke("init_demo", { name: demo.name } );
+    }
+    function openDemo() {
+        let name = demo.name;
+        let dir = "C:\\Users\\User\\Demos\\" + demo.name + "\\";
+        let d = readDir(dir);
     }
     function initCapture() {
         invoke("init_capture", { name: "Capture"});
