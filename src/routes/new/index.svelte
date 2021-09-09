@@ -1,6 +1,6 @@
 <script>
     import { invoke } from '@tauri-apps/api/tauri'
-    import { createDir, writeFile, readDir, FsTextFileOption } from '@tauri-apps/api/fs'
+    import { createDir, writeFile, readDir } from '@tauri-apps/api/fs'
     var demo = {
         "name": "",
     }

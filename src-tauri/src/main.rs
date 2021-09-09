@@ -5,23 +5,23 @@
 
 pub mod cmd;
 pub mod util;
+pub mod error;
 pub mod data;
 pub mod server;
 
-use cmd::{init_demo, init_capture};
+use cmd::{cfg_cmd, init_demo, init_capture};
+use data::{Demo, Section, Step};
+use tauri::{generate_handler, generate_context};
+
+pub use error::{IsdtError, IsdtResult};
 
 fn main() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![
-          cfg_cmd,
-          init_capture,
-          init_demo
+        .invoke_handler(generate_handler![
+            cfg_cmd,
+            init_capture,
+            init_demo
           ])
-        .run(tauri::generate_context!())
+        .run(generate_context!())
         .expect("error while running tauri application");
-}
-
-#[tauri::command]
-fn cfg_cmd() {
-    println!("Invoked from js");
 }
